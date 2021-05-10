@@ -1,0 +1,13 @@
+---
+layout:     post
+title:      IDEA设置自动删除无用Import包
+subtitle:   IDEA设置自动删除无用Import包
+date:       2021-05-10
+author:     haoxing49
+header-img: img/post-bg-debug.png
+catalog: true
+tags:
+    - IDEA
+---
+
+![](https://raw.githubusercontent.com/haoxing49/haoxing49.github.io/main/img/post/IDEA%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E5%88%A0%E9%99%A4%E6%97%A0%E7%94%A8import%E5%8C%85.jpg)
