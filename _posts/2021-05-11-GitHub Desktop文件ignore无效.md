@@ -1,14 +1,15 @@
 ---
 layout:     post
-title:      Git Desktop文件ignore无效
-subtitle:   Git Desktop文件ignore无效
+title:      GitHub Desktop文件ignore无效
+subtitle:   GitHub Desktop文件ignore无效
 date:       2021-05-11
 author:     haoxing49
 header-img: img/post-bg-debug.png
 catalog: true
 tags:
     - Git
-    - Git Desktop
+    - GitHub
+    - GitHub Desktop
 ---
 - 原因:<br/>
 因为gitignore只能忽略那些原来没有被`track`的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的
