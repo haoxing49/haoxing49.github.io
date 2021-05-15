@@ -13,7 +13,7 @@ tags:
 ```
 Error: chaincode install failed with status: 500 - Failed to authorize invocation due to failed ACL check: Failed verifying that proposal's creator satisfies local MSP principal during channelless check policy with policy [Admins]: [This identity is not an admin]
 ```
-- 🔭&nbsp;&nbsp;原因:<br/>
+- 🔍&nbsp;&nbsp;原因:<br/>
 没有链码安装权限，`CORE_PEER_MSPCONFIGPATH`环境变量设置错误
 - 💡&nbsp;&nbsp;解决:<br/>
 设置`CORE_PEER_MSPCONFIGPATH`为管理员，例如:<br/>`export CORE_PEER_MSPCONFIGPATH=/tmp/hyperledger/org1/admin/msp`
@@ -22,7 +22,7 @@ Error: chaincode install failed with status: 500 - Failed to authorize invocatio
 ```
 Error: endorsement failure during invoke. response: status:500 message:"error in simulation: failed to execute transaction e9acf419acbf9d966d5cc70ff5e42d72574e154f87552f78e7d03830bec51dd0: could not launch chaincode fileinfo:8b0eb63f2142a26d172096c5d1ef0c44ab4b483d7a60bfed41cd5832d62293da: chaincode registration failed: container exited with 137" 
 ```
-- 🔭&nbsp;&nbsp;原因:<br/>
+- 🔍&nbsp;&nbsp;原因:<br/>
 安装链码后链码没有启动
 - 💡&nbsp;&nbsp;解决:<br/>
 在docker中启动链码
@@ -32,8 +32,18 @@ failed constructing descriptor for chaincodes
 ```
 - ✏️&nbsp;&nbsp;问题描述:<br/>
 在应用中调用链码是出现错误
-- 🔭&nbsp;&nbsp;可能原因:<br/>
+- 🔍&nbsp;&nbsp;可能原因:<br/>
 链码初始化后数据不同步
 - 💡&nbsp;&nbsp;解决:<br/>
 在docker重新启动节点
----
+------
+```
+ESCC invoke result: response:<status:500 message:"error in simulation: failed to execute transaction dc84996405944109ed3b82676ab5cbb7bb3af6188fbb0f7d2716c68e5e582275: could not launch chaincode fileinfo:06a966b7f3f1f747003f0987c3f071536bf7c9426977223f801b8ee3a46a0a36: error starting container: error starting container: API error (404): network fileinfo_fabric-ca not found" > 
+Error: endorsement failure during invoke. response: status:500 message:"error in simulation: failed to execute transaction dc84996405944109ed3b82676ab5cbb7bb3af6188fbb0f7d2716c68e5e582275: could not launch chaincode fileinfo:06a966b7f3f1f747003f0987c3f071536bf7c9426977223f801b8ee3a46a0a36: error starting container: error starting container: API error (404): network fileinfo_fabric-ca not found"
+```
+- ✏️&nbsp;&nbsp;问题描述:<br/>
+无法提交链码
+- 🔍&nbsp;&nbsp;原因:<br/>
+`docker-compose`文件`CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE`参数配置错误
+- 💡&nbsp;&nbsp;解决:<br/>
+修改`CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE`与其他容器在同一个网络中
