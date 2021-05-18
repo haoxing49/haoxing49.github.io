@@ -28,7 +28,7 @@ Error: endorsement failure during invoke. response: status:500 message:"error in
 在docker中启动链码
 ------
 ```
-failed constructing descriptor for chaincodes
+ERROR org.hyperledger.fabric.sdk.ServiceDiscovery - Error failed constructing descriptor for chaincodes:<name:"fileinfo" >
 ```
 - ✏️&nbsp;&nbsp;问题描述:<br/>
 在应用中调用链码是出现错误
@@ -47,3 +47,4 @@ Error: endorsement failure during invoke. response: status:500 message:"error in
 `docker-compose`文件`CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE`参数配置错误
 - 💡&nbsp;&nbsp;解决:<br/>
 修改`CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE`与其他容器在同一个网络中
+------
