@@ -58,3 +58,15 @@ Failed to send transaction to the orderer
 - 💡&nbsp;&nbsp;解决:<br/>
 在`/etc/hosts`中添加域名映射
 ------
+```
+No valid proposal responses received. 2 peer error responses: error in simulation: transaction returned with failure: Error during contract method execution; error in simulation: transaction returned with failure: Error during contract method execution
+```
+- ✏️&nbsp;&nbsp;问题描述:<br/>
+在应用中进行交易时出现错误
+- 🔍&nbsp;&nbsp;可能原因:<br/>
+    - 交易传参错误
+    - 网络问题
+- 💡&nbsp;&nbsp;解决:<br/>
+    - 检查参数
+    - 重启节点
+------
