@@ -48,3 +48,13 @@ Error: endorsement failure during invoke. response: status:500 message:"error in
 - 💡&nbsp;&nbsp;解决:<br/>
 修改`CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE`与其他容器在同一个网络中
 ------
+```
+Failed to send transaction to the orderer
+```
+- ✏️&nbsp;&nbsp;问题描述:<br/>
+在应用中进行交易出现错误
+- 🔍&nbsp;&nbsp;原因:<br/>
+无法访问`order`节点
+- 💡&nbsp;&nbsp;解决:<br/>
+在`/etc/hosts`中添加域名映射
+------
