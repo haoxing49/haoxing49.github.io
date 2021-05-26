@@ -17,6 +17,7 @@ Error: chaincode install failed with status: 500 - Failed to authorize invocatio
 没有链码安装权限，`CORE_PEER_MSPCONFIGPATH`环境变量设置错误
 - 💡&nbsp;&nbsp;解决:<br/>
 设置`CORE_PEER_MSPCONFIGPATH`为管理员，例如:<br/>`export CORE_PEER_MSPCONFIGPATH=/tmp/hyperledger/org1/admin/msp`
+
 ---
 
 ```
@@ -26,7 +27,9 @@ Error: endorsement failure during invoke. response: status:500 message:"error in
 安装链码后链码没有启动
 - 💡&nbsp;&nbsp;解决:<br/>
 在docker中启动链码
+
 ---
+
 ```
 ERROR org.hyperledger.fabric.sdk.ServiceDiscovery - Error failed constructing descriptor for chaincodes:<name:"fileinfo" >
 ```
@@ -36,7 +39,9 @@ ERROR org.hyperledger.fabric.sdk.ServiceDiscovery - Error failed constructing de
 链码初始化后数据不同步
 - 💡&nbsp;&nbsp;解决:<br/>
 在docker重新启动节点
+
 ---
+
 ```
 ESCC invoke result: response:<status:500 message:"error in simulation: failed to execute transaction dc84996405944109ed3b82676ab5cbb7bb3af6188fbb0f7d2716c68e5e582275: could not launch chaincode fileinfo:06a966b7f3f1f747003f0987c3f071536bf7c9426977223f801b8ee3a46a0a36: error starting container: error starting container: API error (404): network fileinfo_fabric-ca not found" > 
 Error: endorsement failure during invoke. response: status:500 message:"error in simulation: failed to execute transaction dc84996405944109ed3b82676ab5cbb7bb3af6188fbb0f7d2716c68e5e582275: could not launch chaincode fileinfo:06a966b7f3f1f747003f0987c3f071536bf7c9426977223f801b8ee3a46a0a36: error starting container: error starting container: API error (404): network fileinfo_fabric-ca not found"
@@ -47,7 +52,9 @@ Error: endorsement failure during invoke. response: status:500 message:"error in
 `docker-compose`文件`CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE`参数配置错误
 - 💡&nbsp;&nbsp;解决:<br/>
 修改`CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE`与其他容器在同一个网络中
+
 ---
+
 ```
 Failed to send transaction to the orderer
 ```
@@ -57,7 +64,9 @@ Failed to send transaction to the orderer
 无法访问`order`节点
 - 💡&nbsp;&nbsp;解决:<br/>
 在`/etc/hosts`中添加域名映射
+
 ---
+
 ```
 No valid proposal responses received. 2 peer error responses: error in simulation: transaction returned with failure: Error during contract method execution; error in simulation: transaction returned with failure: Error during contract method execution
 ```
@@ -69,4 +78,3 @@ No valid proposal responses received. 2 peer error responses: error in simulatio
 - 💡&nbsp;&nbsp;解决:<br/>
     - 检查参数
     - 重启节点
----
