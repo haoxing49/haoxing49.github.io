@@ -9,4 +9,5 @@ catalog: true
 tags:
     - MAC
 ---
+
 打开`Launchpad`,按住<kbd>control</kbd>+<kbd>option</kbd>+<kbd>command</kbd>,图标出现抖动,点击图标左上角的❎号删除
