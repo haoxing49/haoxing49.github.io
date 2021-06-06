@@ -103,7 +103,7 @@ Error: endorsement failure during invoke. response: status:500 message:"error in
 
 ❌&nbsp;&nbsp;错误提示:<br/>
 ```
-fabric The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server. 
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server. 
 ```
 - ✏️&nbsp;&nbsp;问题描述:<br/>
     - 进行链码初始化时提示
@@ -111,3 +111,43 @@ fabric The last packet sent successfully to the server was 0 milliseconds ago. T
     - 因为初始化链码时数据来源于mysql,连接数据库失败导致
 - 💡&nbsp;&nbsp;解决:<br/>
     - 检查数据库连接地址、账号、密码
+
+---
+
+❌&nbsp;&nbsp;错误提示:<br/>
+```
+Failed to create wallet, please check the configuration, and valid file path.
+```
+- ✏️&nbsp;&nbsp;问题描述:<br/>
+    - 使用`docker`部署`blockchain explore`,错误日志中的错误信息
+- 🔍&nbsp;&nbsp;原因:<br/>
+    - `test-network.json`中文件路径应该填写的是`docker`容器中的路径
+- 💡&nbsp;&nbsp;解决:<br/>
+    - 修改`test-network.json`的文件路径
+
+---
+
+❌&nbsp;&nbsp;错误提示:<br/>
+```
+Failed to authorize invocation due to failed ACL check: Failed verifying that proposal's creator satisfies local MSP principal during channelless check policy with policy [Admins]: [This identity is not an admin]
+```
+- ✏️&nbsp;&nbsp;问题描述:<br/>
+    - 使用`docker`部署`blockchain explore`,错误日志中的错误信息
+- 🔍&nbsp;&nbsp;原因:<br/>
+    - `test-network.json`中`adminPrivateKey`路径错误
+- 💡&nbsp;&nbsp;解决:<br/>
+    - 修改`test-network.json`的文件路径
+
+---
+
+❌&nbsp;&nbsp;错误提示:<br/>
+```
+error sending transaction for invoke: could not send to orderer node: EOF - proposal response: version:1 response:<status:200 >
+```
+- ✏️&nbsp;&nbsp;问题描述:<br/>
+    - 在进行链码初始化时返回的错误信息
+- 🔍&nbsp;&nbsp;原因:<br/>
+    - 根据错误提示可知:无法发送到排序节点;
+- 💡&nbsp;&nbsp;解决:<br/>
+    - 在确定各个节点启动没有问题的情况下重新初始化链码
+
