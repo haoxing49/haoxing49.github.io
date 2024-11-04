@@ -73,6 +73,7 @@
       <h1 class="site-title">Nebula</h1>
       <i class="logo-line"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">慢慢累积整理</p>
   </div>
 
   <div class="site-nav-right">
@@ -121,13 +122,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -149,6 +150,178 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://haoxing49.github.io/%E6%B8%85%E7%A9%BA%E6%8C%87%E5%AE%9A%E5%A4%9A%E4%B8%AA%E6%95%B0%E6%8D%AE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haoxing49">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nebula">
+      <meta itemprop="description" content="开发记录">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Nebula">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/%E6%B8%85%E7%A9%BA%E6%8C%87%E5%AE%9A%E5%A4%9A%E4%B8%AA%E6%95%B0%E6%8D%AE%E8%A1%A8/" class="post-title-link" itemprop="url">清空指定多个数据表</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-11-04 17:46:13 / 修改时间：17:48:34" itemprop="dateCreated datePublished" datetime="2024-11-04T17:46:13+08:00">2024-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SQL-Server/" itemprop="url" rel="index"><span itemprop="name">SQL Server</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>生成多个表的<code>drop</code>语句,记录</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> <span class="variable">@tablenames</span> <span class="type">VARCHAR</span>(max)<span class="operator">=</span><span class="string">&#x27;table_name1|table_name_2&#x27;</span>, <span class="variable">@sql</span> <span class="type">VARCHAR</span>(max)<span class="operator">=</span><span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">DECLARE</span> cur1 <span class="keyword">CURSOR</span> <span class="keyword">FOR</span> <span class="keyword">SELECT</span> <span class="keyword">value</span> <span class="keyword">FROM</span> dbo.HxSplitStringToTable(<span class="variable">@tablenames</span>,<span class="string">&#x27;|&#x27;</span>)</span><br><span class="line">    <span class="keyword">DECLARE</span> <span class="variable">@tablename</span> <span class="type">VARCHAR</span>(<span class="number">200</span>)<span class="operator">=</span><span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">OPEN</span> cur1;</span><br><span class="line"><span class="keyword">FETCH</span> NEXT <span class="keyword">FROM</span> cur1 <span class="keyword">into</span> <span class="variable">@tablename</span>;</span><br><span class="line">WHILE @<span class="variable">@FETCH_STATUS</span> <span class="operator">=</span> <span class="number">0</span> <span class="keyword">BEGIN</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@sql</span><span class="operator">+</span><span class="operator">=</span><span class="string">&#x27;TRUNCATE TABLE &#x27;</span><span class="operator">+</span><span class="variable">@tablename</span><span class="operator">+</span><span class="string">&#x27;;&#x27;</span>;</span><br><span class="line"><span class="keyword">FETCH</span> NEXT <span class="keyword">FROM</span> cur1 <span class="keyword">into</span> <span class="variable">@tablename</span>;</span><br><span class="line"><span class="keyword">END</span></span><br><span class="line"><span class="keyword">CLOSE</span> cur1;</span><br><span class="line"><span class="keyword">DEALLOCATE</span> cur1;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用<code>SELECT @sql;</code></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://haoxing49.github.io/%E6%A0%B9%E6%8D%AE%E6%95%B0%E6%8D%AE%E8%A1%A8%E5%90%8D%E7%A7%B0%E7%94%9F%E6%88%90Insert%E8%AF%AD%E5%8F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="haoxing49">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nebula">
+      <meta itemprop="description" content="开发记录">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Nebula">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/%E6%A0%B9%E6%8D%AE%E6%95%B0%E6%8D%AE%E8%A1%A8%E5%90%8D%E7%A7%B0%E7%94%9F%E6%88%90Insert%E8%AF%AD%E5%8F%A5/" class="post-title-link" itemprop="url">根据数据表名称生成Insert语句</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-11-04 17:17:12 / 修改时间：17:48:45" itemprop="dateCreated datePublished" datetime="2024-11-04T17:17:12+08:00">2024-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SQL-Server/" itemprop="url" rel="index"><span itemprop="name">SQL Server</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>在做用友U8二次开发时需要通过数据库表名生成Insert语句。通过网上查找资料整理。</p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/%E6%A0%B9%E6%8D%AE%E6%95%B0%E6%8D%AE%E8%A1%A8%E5%90%8D%E7%A7%B0%E7%94%9F%E6%88%90Insert%E8%AF%AD%E5%8F%A5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -458,7 +631,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-04 17:00:11" itemprop="dateModified" datetime="2024-11-04T17:00:11+08:00">2024-11-04</time>
+      <time title="修改时间：2024-11-04 17:41:40" itemprop="dateModified" datetime="2024-11-04T17:41:40+08:00">2024-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -483,13 +656,15 @@
           <ul>
 <li>单据状态</li>
 </ul>
-<p><code>SX,审批未通过=0,审批通过=1,审批进行中=2,提交状态=3,作废状态=4,冲销状态=5,终止(结算)态=6,冻结态=7,自由态=8</code></p>
-<hr>
-<ul>
-<li>获取单据附件信息</li>
-</ul>
-<p><code>select * From SM_PUB_FILESYSTEM where ISFOLDER=&#39;n&#39; and path like &#39;%单据主键%&#39;</code></p>
-
+<h2 id="SX-审批未通过-0-审批通过-1-审批进行中-2-提交状态-3-作废状态-4-冲销状态-5-终止-结算-态-6-冻结态-7-自由态-8"><a href="#SX-审批未通过-0-审批通过-1-审批进行中-2-提交状态-3-作废状态-4-冲销状态-5-终止-结算-态-6-冻结态-7-自由态-8" class="headerlink" title="SX,审批未通过=0,审批通过=1,审批进行中=2,提交状态=3,作废状态=4,冲销状态=5,终止(结算)态=6,冻结态=7,自由态=8"></a><code>SX,审批未通过=0,审批通过=1,审批进行中=2,提交状态=3,作废状态=4,冲销状态=5,终止(结算)态=6,冻结态=7,自由态=8</code><br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/U8C%E8%AE%B0%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -850,169 +1025,6 @@
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SkinSE.SkinSE_Net sn = <span class="keyword">new</span> SkinSE_Net();</span><br><span class="line">            sn.Init_NET(<span class="keyword">this</span>,<span class="number">1</span>);</span><br><span class="line">            sn.Start();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <hr>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://haoxing49.github.io/MAC%E5%88%A0%E9%99%A4Launchpad%E8%BD%AF%E4%BB%B6%E5%9B%BE%E6%A0%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="haoxing49">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nebula">
-      <meta itemprop="description" content="开发记录">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Nebula">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/MAC%E5%88%A0%E9%99%A4Launchpad%E8%BD%AF%E4%BB%B6%E5%9B%BE%E6%A0%87/" class="post-title-link" itemprop="url">MAC删除Launchpad图标</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-05-24 00:00:00" itemprop="dateCreated datePublished" datetime="2021-05-24T00:00:00+08:00">2021-05-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-01 10:30:39" itemprop="dateModified" datetime="2024-11-01T10:30:39+08:00">2024-11-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%B8%9A%E4%BD%99%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">业余学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>打开<code>Launchpad</code>,按住<kbd>control</kbd>+<kbd>option</kbd>+<kbd>command</kbd>,图标出现抖动,点击图标左上角的❎号删除</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://haoxing49.github.io/MAC%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="haoxing49">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nebula">
-      <meta itemprop="description" content="开发记录">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Nebula">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/MAC%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">MAC常用命令</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-05-17 00:00:00" itemprop="dateCreated datePublished" datetime="2021-05-17T00:00:00+08:00">2021-05-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-01 10:30:53" itemprop="dateModified" datetime="2024-11-01T10:30:53+08:00">2024-11-01</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li>重启网卡<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ifconfig en0 down</span><br><span class="line">sudo ifconfig en0 up</span><br></pre></td></tr></table></figure></li>
-</ul>
 
       
     </div>
